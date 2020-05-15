@@ -24,7 +24,7 @@ const isAuthenticated = (req, res, next) => {
 /*-----------------------------------------------------*/
 
 const isAdmin = (req, res, next) => {
-  if ((req, profile.role === 0)) {
+  if (req.profile.role === 0) {
     return res.status(403).json({
       error: 'You dont have ADMIN privilages ,ACCESS DENIED',
     });

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app"
+    "dev": "nodemon app"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
     "express-validator": "^6.4.1",
@@ -21,8 +22,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.11",
-    "shortid": "^2.2.15",
-    "uuid": "^8.0.0"
+    "nanoid": "^3.1.5",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",

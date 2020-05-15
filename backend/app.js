@@ -33,10 +33,16 @@ app.use(bodyParser.json());
 // * RETRIEVING ROUTES
 const authRoute = require('./routes/auth_route');
 const userRoute = require('./routes/user_route');
+const categoryRoute = require('./routes/category_route');
+const productRoute = require('./routes/product_route');
+const orderRoute = require('./routes/order_route');
 
 // * USING ROUTES
 app.use('/api', authRoute);
-app.use('/user', userRoute);
+app.use('/api/user', userRoute);
+app.use('/api/category', categoryRoute);
+app.use('/api/products', productRoute);
+app.use('/api/orders', orderRoute);
 
 // * CREATING A SERVER
 app.listen(process.env.PORT, () => {

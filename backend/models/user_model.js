@@ -1,14 +1,10 @@
 const mongoose = require('mongoose');
-const shortid = require('shortid');
-const { v4: uuid } = require('uuid');
+
+const { nanoid } = require('nanoid');
 const crypto = require('crypto');
 
 const userSchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      default: shortid.generate,
-    },
     name: {
       type: String,
       required: true,
@@ -48,7 +44,7 @@ userSchema
   .virtual('password')
   .set(function (password) {
     this._password = password;
-    this.salt = uuid();
+    this.salt = nanoid();
     this.hashedPassword = this.hashPassword(password);
   })
   .get(function () {

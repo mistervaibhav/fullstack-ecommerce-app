@@ -3,6 +3,22 @@ const shortid = require('shortid');
 
 const { ObjectId } = mongoose.Schema;
 
+const cartSchema = new mongoose.Schema({
+  product: {
+    type: ObjectId,
+    ref: 'Product',
+  },
+  name: {
+    type: String,
+  },
+  count: {
+    type: Number,
+  },
+  price: {
+    type: Number,
+  },
+});
+
 const orderSchema = new mongoose.Schema(
   {
     _id: {
@@ -20,6 +36,11 @@ const orderSchema = new mongoose.Schema(
     updated: {
       type: Date,
     },
+    status: {
+      type: String,
+      default: 'Placed',
+      enum: ['Cancelled', 'Delivered', 'Shipped', 'Proccessing', 'Placed'],
+    },
     user: {
       type: ObjectId,
       ref: 'User',
@@ -27,22 +48,6 @@ const orderSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-const cartSchema = new mongoose.Schema({
-  product: {
-    type: ObjectId,
-    ref: 'Product',
-  },
-  name: {
-    type: String,
-  },
-  count: {
-    type: Number,
-  },
-  price: {
-    type: Number,
-  },
-});
 
 const Cart = mongoose.model('Cart', cartSchema);
 const Order = mongoose.model('Order', orderSchema);

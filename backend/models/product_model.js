@@ -1,14 +1,9 @@
 const mongoose = require('mongoose');
-const shortid = require('shortid');
 
 const { ObjectId } = mongoose.Schema;
 
 const productSchema = new mongoose.Schema(
   {
-    _id: {
-      type: String,
-      default: shortid.generate,
-    },
     name: {
       type: String,
       required: true,
