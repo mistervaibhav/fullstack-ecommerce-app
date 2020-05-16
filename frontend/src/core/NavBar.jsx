@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+
+import { isAuthenticated, logout } from '../auth/helper';
 
 const activeTab = (history, path) => {
   if (history.location.pathname === path) {
@@ -41,21 +43,35 @@ const NavBar = ({ history }) => {
               <h4>Admin</h4>
             </Link>
           </li>
-          <li className='nav-item'>
-            <Link style={activeTab(history, '/login')} className='nav-link' to='/login'>
-              <h4>Login</h4>
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link style={activeTab(history, '/register')} className='nav-link' to='/register'>
-              <h4>Register</h4>
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link style={activeTab(history, '/logout')} className='nav-link' to='/logout'>
-              <h4>Logout</h4>
-            </Link>
-          </li>
+          {!isAuthenticated() && (
+            <Fragment>
+              <li className='nav-item'>
+                <Link style={activeTab(history, '/login')} className='nav-link' to='/login'>
+                  <h4>Login</h4>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link style={activeTab(history, '/register')} className='nav-link' to='/register'>
+                  <h4>Register</h4>
+                </Link>
+              </li>
+            </Fragment>
+          )}
+          {isAuthenticated() && (
+            <li className='nav-item'>
+              <span
+                style={{ cursor: 'pointer' }}
+                className='nav-link text-warning'
+                onClick={() => {
+                  logout(() => {
+                    history.push('/');
+                  });
+                }}
+              >
+                <h4>Logout</h4>
+              </span>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

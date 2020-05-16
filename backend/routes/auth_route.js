@@ -9,16 +9,16 @@ const { registerValidation } = require('../middleware/validation_mw');
 const { loginValidation } = require('../middleware/validation_mw');
 const { isLoggedIn } = require('../middleware/route_protection_mw');
 
-router.post('/register', registerValidation, register);
+const print = (req, res, next) => {
+  console.log(req.body);
+  next();
+};
+
+router.post('/register', print, registerValidation, print, register);
+// router.post('/register', register);
 
 router.post('/login', loginValidation, login);
 
 router.get('/logout', logout);
-
-router.get('/test', isLoggedIn, (req, res) => {
-  res.json({
-    request: req.auth,
-  });
-});
 
 module.exports = router;

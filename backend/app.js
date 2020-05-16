@@ -27,8 +27,8 @@ mongoose
 // app.use(morgan('tiny'));
 app.use(cors());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // * RETRIEVING ROUTES
 const authRoute = require('./routes/auth_route');
