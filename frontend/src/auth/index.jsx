@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../../backend';
+import { API } from '../app/api';
 
 /*----------------------------------------------------------------------------------------------- */
 
@@ -17,9 +17,11 @@ export const register = async (data) => {
 export const login = async (data) => {
   try {
     const response = await axios.post(`${API}/login`, data);
-    return response.data;
+    //  console.log('success in login', response.data);
+    return response;
   } catch (error) {
-    return error.response.data;
+    //  console.log('error in login', error.response.data);
+    return error.response;
   }
 };
 
@@ -39,10 +41,9 @@ export const logout = async (next) => {
 
 /*----------------------------------------------------------------------------------------------- */
 
-export const authenticate = (data, next) => {
+export const authenticate = (data) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('token', JSON.stringify(data));
-    next();
   }
 };
 

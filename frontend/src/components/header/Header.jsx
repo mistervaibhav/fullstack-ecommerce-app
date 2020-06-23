@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-import { isAuthenticated, logout } from '../auth/helper';
+import { isAuthenticated, logout } from '../../auth';
 
 const activeTab = (history, path) => {
   if (history.location.pathname === path) {
@@ -11,7 +11,7 @@ const activeTab = (history, path) => {
   }
 };
 
-const NavBar = ({ history }) => {
+const Header = ({ history }) => {
   return (
     <nav className='navbar navbar-expand-md navbar-dark  bg-dark'>
       <Link className='navbar-brand' to='/'>
@@ -22,27 +22,35 @@ const NavBar = ({ history }) => {
       </button>
       <div className='collapse navbar-collapse' id='navbarMenu'>
         <ul className='navbar-nav ml-auto'>
-          <li className='nav-item'>
-            <Link style={activeTab(history, '/cart')} className='nav-link' to='/cart'>
-              <h4>Cart</h4>
-            </Link>
-          </li>
-          <li className='nav-item'>
-            <Link
-              style={activeTab(history, '/user/dashboard')}
-              className='nav-link'
-              to='/user/dashboard'
-            ></Link>
-          </li>
-          <li className='nav-item'>
-            <Link
-              style={activeTab(history, '/admin/dashboard')}
-              className='nav-link'
-              to='/admin/dashboard'
-            >
-              <h4>Admin</h4>
-            </Link>
-          </li>
+          {isAuthenticated() && isAuthenticated().user.role === 0 && (
+            <li className='nav-item'>
+              <Link style={activeTab(history, '/cart')} className='nav-link' to='/cart'>
+                <h4>Cart</h4>
+              </Link>
+            </li>
+          )}
+          {isAuthenticated() && isAuthenticated().user.role === 0 && (
+            <li className='nav-item'>
+              <Link
+                style={activeTab(history, '/user/dashboard')}
+                className='nav-link'
+                to='/user/dashboard'
+              >
+                <h4>U. dashboard</h4>
+              </Link>
+            </li>
+          )}
+          {isAuthenticated() && isAuthenticated().user.role === 1 && (
+            <li className='nav-item'>
+              <Link
+                style={activeTab(history, '/admin/dashboard')}
+                className='nav-link'
+                to='/admin/dashboard'
+              >
+                <h4>A. dashboard</h4>
+              </Link>
+            </li>
+          )}
           {!isAuthenticated() && (
             <Fragment>
               <li className='nav-item'>
@@ -78,4 +86,4 @@ const NavBar = ({ history }) => {
   );
 };
 
-export default withRouter(NavBar);
+export default withRouter(Header);

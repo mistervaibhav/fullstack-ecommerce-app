@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
-import Layout from '../core/Layout';
-
-import { login, authenticate, isAuthenticated } from '../auth/helper';
+import { login, authenticate, isAuthenticated } from '../../auth';
 
 const Login = () => {
   //
@@ -35,24 +33,27 @@ const Login = () => {
       ...formData,
       error: false,
     });
-    login({ email, password })
-      .then((data) => {
-        if (data.error) {
-          setFormData({
-            ...formData,
-            error: data.error,
-            loading: false,
-          });
-        } else {
-          authenticate(data, () => {
-            setFormData({
-              ...formData,
-              didRedirect: true,
-            });
-          }).catch((error) => console.log('login failed'));
-        }
-      })
-      .catch((error) => console.log('error in login'));
+
+    const response = await login({ email, password });
+
+    const { data, status } = response;
+
+    console.log(data);
+
+    if (status === 200) {
+      console.log(status);
+      authenticate(data);
+      setFormData({
+        ...formData,
+        didRedirect: true,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        error: data.message,
+        loading: false,
+      });
+    }
   };
 
   const loadingMessage = () => {
@@ -77,9 +78,9 @@ const Login = () => {
     // todo continue from here
     if (didRedirect) {
       if (user && user.role === 1) {
-        return <p>Redirect to admin dashboard</p>;
+        return <Redirect to='/admin/dashboard' />;
       } else {
-        return <p>Redirect to user dashboard</p>;
+        return <Redirect to='/user/dashboard' />;
       }
     }
     if (isAuthenticated()) {
@@ -124,13 +125,13 @@ const Login = () => {
   };
 
   return (
-    <Layout title='Login here' description='A page for users to Login themselves'>
+    <div>
       {loadingMessage()}
       {errorMessage()}
       {loginForm()}
       {performRedirect()}
       <p className='text-white text-center'> {JSON.stringify(formData)} </p>
-    </Layout>
+    </div>
   );
 };
 

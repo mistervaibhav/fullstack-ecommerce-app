@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-// import { ToastsContainer, ToastsStore } from 'react-toasts';
+
 import { Link } from 'react-router-dom';
 
-import Layout from '../core/Layout';
-
-import { register } from '../auth/helper/index';
+import { register } from '../../auth';
 
 const Register = () => {
   //
@@ -122,12 +120,7 @@ const Register = () => {
     );
   };
 
-  return (
-    <Layout title='Signup here' description='A page for users to register themselves'>
-      {registerForm()}
-      <p className='text-white text-center'>{JSON.stringify(formData)}</p>
-    </Layout>
-  );
+  return <div>{registerForm()}</div>;
 };
 
 export default Register;
