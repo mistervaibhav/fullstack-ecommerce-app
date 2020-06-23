@@ -27,17 +27,22 @@ const AdminSideBar = ({ name, email }) => {
             </Link>
           </li>
           <li className='list-group-item'>
+            <Link to='/admin/manage/categories' className='nav-link'>
+              Manage Categories
+            </Link>
+          </li>
+          <li className='list-group-item'>
             <Link to='/admin/create/product' className='nav-link'>
               Create Products
             </Link>
           </li>
           <li className='list-group-item'>
-            <Link to='/admin/orders' className='nav-link'>
+            <Link to='/admin/manage/products' className='nav-link'>
               Manage Products
             </Link>
           </li>
           <li className='list-group-item'>
-            <Link to='/admin/products' className='nav-link'>
+            <Link to='/admin/manage/orders' className='nav-link'>
               Manage Orders
             </Link>
           </li>

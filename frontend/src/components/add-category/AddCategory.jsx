@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { isAuthenticated } from '../../auth';
 import { Link } from 'react-router-dom';
 
-import { createCategory } from '../../pages/admin/controller/adminapicall';
+import { createCategory } from '../../pages/admin/helper';
 
 const AddCategory = () => {
   const [name, setName] = useState('');

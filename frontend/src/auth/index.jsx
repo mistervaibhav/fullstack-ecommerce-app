@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../app/api';
+import { API } from '../config/api';
 
 /*----------------------------------------------------------------------------------------------- */
 
