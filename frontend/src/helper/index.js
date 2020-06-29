@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../config/api';
+// import { API } from '../config/api';
 
 /**
  * * POST
@@ -7,7 +7,7 @@ import { API } from '../config/api';
  */
 export const createCategory = async (userId, token, category) => {
   try {
-    const response = await axios.post(`${API}/category/create/${userId}`, category, {
+    const response = await axios.post(`/category/create/${userId}`, category, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,7 +26,7 @@ export const createCategory = async (userId, token, category) => {
  */
 export const createProduct = async (userId, token, product) => {
   try {
-    const response = await axios.post(`${API}/products/create/${userId}`, product, {
+    const response = await axios.post(`/products/create/${userId}`, product, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -45,7 +45,7 @@ export const createProduct = async (userId, token, product) => {
  */
 export const getCategories = async () => {
   try {
-    const response = await axios.get(`${API}/category/all`);
+    const response = await axios.get(`/category/all`);
     // console.log(response.data);
     return response.data;
   } catch (error) {
@@ -60,7 +60,7 @@ export const getCategories = async () => {
  */
 export const getProductById = async (productId) => {
   try {
-    const response = await axios.get(`${API}/products/${productId}`);
+    const response = await axios.get(`/products/${productId}`);
     // console.log(response.data);
     return response.data;
   } catch (error) {
@@ -75,7 +75,7 @@ export const getProductById = async (productId) => {
  */
 export const getProducts = async () => {
   try {
-    const response = await axios.get(`${API}/products/all`);
+    const response = await axios.get(`/products/all`);
     // console.log(response.data);
     return response.data;
   } catch (error) {
@@ -90,7 +90,7 @@ export const getProducts = async () => {
  */
 export const deleteProduct = async (productId, userId, token) => {
   try {
-    const response = await axios.delete(`${API}/products/${productId}/${userId}`, {
+    const response = await axios.delete(`/products/${productId}/${userId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -109,7 +109,7 @@ export const deleteProduct = async (productId, userId, token) => {
  */
 export const updateProduct = async (productId, userId, token, product) => {
   try {
-    const response = await axios.put(`${API}/products/${productId}/${userId}`, product, {
+    const response = await axios.put(`/products/${productId}/${userId}`, product, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
