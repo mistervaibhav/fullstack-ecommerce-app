@@ -2,7 +2,12 @@
   "name": "fullstack-ecom",
   "version": "1.0.0",
   "description": "An ecommerce app, built on the MERN stack.",
-  "main": "index.js",
+  "main": "backend/app.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x",
+    "yarn": "1.x"
+  },
   "scripts": {
     "start": "cd backend && npm install && npm run start",
     "heroku-postbuild": "cd frontend && yarn install && yarn build"
