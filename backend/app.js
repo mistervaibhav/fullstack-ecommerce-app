@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
+const path = require('path');
 
 // * CREATING AN EXPRESS INSTANCE
 const app = express();
@@ -14,7 +15,7 @@ dotenv.config();
 
 // * CONNECTING TO A DATABASE
 mongoose
-  .connect(process.env.DATABASE_URI, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
@@ -29,6 +30,15 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// * DEPLOYMENT SETUP - HEROKU
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend', 'build')));
+
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+  });
+}
 
 // * RETRIEVING ROUTES
 const authRoute = require('./routes/auth_route');

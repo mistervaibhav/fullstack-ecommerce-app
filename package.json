@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "An ecommerce app, built on the MERN stack.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "cd backend && npm install && npm run start",
+    "heroku-postbuild": "cd frontend && yarn install && yarn build"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mistervaibhav/fullstack-ecommerce-app.git"
