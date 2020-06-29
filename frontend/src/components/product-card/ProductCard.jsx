@@ -43,7 +43,7 @@ const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
         <button
           onClick={() => {
             removeItemFromCart(product._id);
-            setReload(!reload);
+            // setReload(!reload);
           }}
           className={disabledForAdmin + ' btn btn-block btn-outline-danger mt-2 mb-2'}
         >
