@@ -28,7 +28,7 @@ const getCategory = (req, res) => {
 /*---------------------------------------------------------*/
 
 const getCategoryAll = (req, res) => {
-  console.log('all cats route called');
+  //console.log('all cats route called');
 
   Category.find().exec((err, categories) => {
     if (err) {

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { isAuthenticated } from '../../auth';
 import { Link } from 'react-router-dom';
 
-import { createProduct, getCategories } from '../../pages/admin/helper';
+import { createProduct, getCategories } from '../../helper';
 
 const AddProduct = () => {
   const [details, setDetails] = useState({
@@ -11,41 +11,52 @@ const AddProduct = () => {
     description: '',
     price: '',
     stock: '',
-    photo: '',
+    image: '',
     category: '',
   });
-  const [product, setProduct] = useState('');
-  const [redirect, setRedirect] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState('');
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
   const [categories, setCategories] = useState([]);
 
   const { user, token } = isAuthenticated();
-  const { name, description, price, stock } = details;
+  const { name, description, price, stock, category, image } = details;
 
   useEffect(() => {
     const loadCategories = async () => {
-      let categories = await getCategories();
-      setCategories(categories);
+      try {
+        let categories = await getCategories();
+        setCategories(categories);
+        setFormData(new FormData());
+      } catch (error) {
+        setError(`Problem fetching the categories : ${error}`);
+        console.log(error);
+      }
     };
     loadCategories();
     // console.log(categories);
   }, []);
 
   const inputHandler = (name) => (event) => {
+    const value = name === 'image' ? event.target.files[0] : event.target.value;
+    formData.set(name, value);
     setError(false);
     // todo : debug this shit here
-    // setName(event.target.value);
+    setDetails({ ...details, [name]: value });
     setSuccess(false);
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    // console.log('submit handler clicked');
     setError('');
-    let response = await createProduct(user._id, token, { name });
+    let response = await createProduct(user._id, token, formData);
 
-    if (response.category) {
+    // console.log(response);
+    if (response.error) {
+      setSuccess(false);
+      setError(response.error);
+    } else {
       setError(false);
       setSuccess(true);
       setDetails({
@@ -53,12 +64,9 @@ const AddProduct = () => {
         description: '',
         price: '',
         stock: '',
+        image: '',
+        category: '',
       });
-    }
-
-    if (response.error) {
-      setSuccess(false);
-      setError(response.error);
     }
   };
 
@@ -87,13 +95,8 @@ const AddProduct = () => {
 
       <div className='form-group'>
         <label className='btn btn-block btn-success'>
-          <input
-            onChange={inputHandler('photo')}
-            type='file'
-            name='photo'
-            accept='image'
-            placeholder='choose a file'
-          />
+          Upload a file
+          <input onChange={inputHandler('image')} type='file' name='image' accept='image' />
         </label>
       </div>
 
@@ -128,12 +131,11 @@ const AddProduct = () => {
       </div>
 
       <div className='form-group'>
-        <select onChange={inputHandler('category')} className='form-control' placeholder='Category'>
-          <option hidden>Select</option>
-
-          {categories.map((category, index) => (
-            <option key={index} value={category.name}>
-              {category.name}
+        <select onChange={inputHandler('category')} className='form-control'>
+          <option hidden>Select a category</option>
+          {categories?.map((cat, index) => (
+            <option key={index} value={cat._id}>
+              {cat.name}
             </option>
           ))}
         </select>
@@ -141,7 +143,7 @@ const AddProduct = () => {
 
       <div className='form-group'>
         <input
-          onChange={inputHandler('quantity')}
+          onChange={inputHandler('stock')}
           type='number'
           className='form-control'
           placeholder='Quantity'

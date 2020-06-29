@@ -38,10 +38,10 @@ const Login = () => {
 
     const { data, status } = response;
 
-    console.log(data);
+    // console.log(data);
 
     if (status === 200) {
-      console.log(status);
+      // console.log(status);
       authenticate(data);
       setFormData({
         ...formData,
@@ -80,7 +80,7 @@ const Login = () => {
       if (user && user.role === 1) {
         return <Redirect to='/admin/dashboard' />;
       } else {
-        return <Redirect to='/user/dashboard' />;
+        return <Redirect to='/' />;
       }
     }
     if (isAuthenticated()) {

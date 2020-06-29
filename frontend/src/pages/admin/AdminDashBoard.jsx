@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 
 import { isAuthenticated } from '../../auth';
 import AdminRoute from '../../auth/AdminRoutes';
@@ -10,6 +10,7 @@ import AddProduct from '../../components/add-product/AddProduct';
 import ManageCategories from '../../components/manage-categories/ManageCategories';
 import ManageOrders from '../../components/manage-orders/ManageOrders';
 import ManageProducts from '../../components/manage-products/ManageProducts';
+import UpdateProduct from '../../components/update-product/UpdateProduct';
 
 import './style.scss';
 
@@ -27,6 +28,7 @@ const AdminDashBoard = () => {
           <AdminRoute exact path='/admin/create/product' component={AddProduct} />
           <AdminRoute exact path='/admin/manage/categories' component={ManageCategories} />
           <AdminRoute exact path='/admin/manage/products' component={ManageProducts} />
+          <AdminRoute exact path='/admin/update/products/:productId' component={UpdateProduct} />
           <AdminRoute exact path='/admin/manage/orders' component={ManageOrders} />
         </Switch>
       </BrowserRouter>

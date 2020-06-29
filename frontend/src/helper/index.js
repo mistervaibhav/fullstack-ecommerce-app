@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../../../config/api';
+import { API } from '../config/api';
 
 /**
  * * POST
@@ -58,9 +58,9 @@ export const getCategories = async () => {
  * * GET
  * * GET A PRODUCT
  */
-export const getProduct = async (productId) => {
+export const getProductById = async (productId) => {
   try {
-    const response = await axios.get(`${API}/${productId}`);
+    const response = await axios.get(`${API}/products/${productId}`);
     // console.log(response.data);
     return response.data;
   } catch (error) {
@@ -119,5 +119,50 @@ export const updateProduct = async (productId, userId, token, product) => {
   } catch (error) {
     // console.log(error.response.data);
     return error.response.data;
+  }
+};
+
+/**
+ * * ADD ITEM TO CART USING LOCALSTORAGE
+ */
+export const addItemToCart = (item) => {
+  let cart = [];
+
+  if (typeof window !== undefined) {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    cart.push({ ...item });
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+};
+/**
+ * * REMOVE ITEM FROM CART
+ */
+export const removeItemFromCart = (productId) => {
+  let cart = [];
+
+  if (typeof window !== undefined) {
+    if (localStorage.getItem('cart')) {
+      cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    cart.map((product, index) => {
+      if (product._id === productId) {
+        cart.splice(index, 1);
+      }
+    });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    return cart;
+  }
+};
+
+/**
+ * * LOAD CART ITEMS FROM LOCALSTORAGE
+ */
+export const loadItemsFromCart = () => {
+  if (typeof window !== undefined) {
+    if (localStorage.getItem('cart')) {
+      return JSON.parse(localStorage.getItem('cart'));
+    }
   }
 };

@@ -63,10 +63,16 @@ const createProduct = (req, res) => {
 
 /*---------------------------------------------------------*/
 
-const getProduct = (req, res) => {
-  req.product.inage = undefined;
+const getProduct = async (req, res) => {
+  const { productId } = req.params;
 
-  return res.json(req.product);
+  try {
+    const product = await Product.findById({ _id: productId });
+    // console.log(product);
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(404).json({ error: 'No product found' });
+  }
 };
 
 /*---------------------------------------------------------*/
@@ -125,7 +131,7 @@ const updateProduct = (req, res) => {
     console.log('fields :', fields);
     console.log('files :', files);
 
-    const product = req.product;
+    let product = req.product;
     product = _.extend(product, fields);
     console.log('product updated');
 

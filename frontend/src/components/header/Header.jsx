@@ -42,11 +42,7 @@ const Header = ({ history }) => {
           )}
           {isAuthenticated() && isAuthenticated().user.role === 1 && (
             <li className='nav-item'>
-              <Link
-                style={activeTab(history, '/admin/dashboard')}
-                className='nav-link'
-                to='/admin/dashboard'
-              >
+              <Link style={activeTab(history, '/admin')} className='nav-link' to='/admin'>
                 <h4>A. dashboard</h4>
               </Link>
             </li>
