@@ -1,17 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const dotenv = require('dotenv');
 const path = require('path');
 
 // * CREATING AN EXPRESS INSTANCE
 const app = express();
-
-// * CONFIGURING ENVIRONMENT VARIABLES
-dotenv.config();
 
 // * CONNECTING TO A DATABASE
 mongoose
@@ -23,6 +19,12 @@ mongoose
   .then(() => {
     console.log('================={      CONNECTED TO MONGODB     }=================');
   });
+
+// * CONFIGURING ENVIRONMENT VARIABLES LOCALLY
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
 
 // * USING THIRD PARTY MIDDLEWARE
 // app.use(morgan('tiny'));
@@ -41,12 +43,12 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 //*==================================================================================
-app.use(express.static(path.join(__dirname, '../frontend', 'build')));
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
-});
-console.log(path.join(__dirname, '../frontend', 'build'));
-console.log(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+// app.use(express.static(path.join(__dirname, '../frontend', 'build')));
+// app.get('/', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+// });
+// console.log(path.join(__dirname, '../frontend', 'build'));
+// console.log(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
 //*==================================================================================
 
 // * RETRIEVING ROUTES

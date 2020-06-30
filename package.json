@@ -2,14 +2,14 @@
   "name": "fullstack-ecom",
   "version": "1.0.0",
   "description": "An ecommerce app, built on the MERN stack.",
-  "main": "backend/app.js",
+  "main": "app.js",
   "engines": {
     "node": "12.x",
     "npm": "6.x",
     "yarn": "1.x"
   },
   "scripts": {
-    "start": "cd backend && npm install && npm start",
+    "start": "cd backend && npm install && npm run start",
     "heroku-postbuild": "cd frontend && yarn install && yarn build"
   },
   "repository": {
@@ -21,6 +21,5 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mistervaibhav/fullstack-ecommerce-app/issues"
-  },
-  "homepage": "https://github.com/mistervaibhav/fullstack-ecommerce-app#readme"
+  }
 }
