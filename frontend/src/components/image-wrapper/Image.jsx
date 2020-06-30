@@ -7,16 +7,7 @@ const Image = ({ product }) => {
 
   // console.log(src);
 
-  return (
-    <div className='rounded border border-success p-2'>
-      <img
-        src={src}
-        alt='photo'
-        style={{ maxHeight: '100%', maxWidth: '100%' }}
-        className='mb-3 rounded'
-      />
-    </div>
-  );
+  return <img src={src} alt='photo' className='img-fluid' />;
 };
 
 export default Image;

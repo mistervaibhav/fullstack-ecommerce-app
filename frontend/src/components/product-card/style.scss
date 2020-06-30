@@ -1,0 +1,9 @@
+.card {
+  max-width: 300px;
+  margin: 25px;
+
+  .img-fluid {
+    height: 175px;
+    object-fit: cover;
+  }
+}

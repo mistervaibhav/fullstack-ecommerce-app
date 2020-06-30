@@ -6,6 +6,12 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
+// * CONFIGURING ENVIRONMENT VARIABLES LOCALLY
+if (process.env.NODE_ENV !== 'production') {
+  const dotenv = require('dotenv');
+  dotenv.config();
+}
+
 // * CREATING AN EXPRESS INSTANCE
 const app = express();
 
@@ -19,12 +25,6 @@ mongoose
   .then(() => {
     console.log('================={      CONNECTED TO MONGODB     }=================');
   });
-
-// * CONFIGURING ENVIRONMENT VARIABLES LOCALLY
-if (process.env.NODE_ENV !== 'production') {
-  const dotenv = require('dotenv');
-  dotenv.config();
-}
 
 // * USING THIRD PARTY MIDDLEWARE
 // app.use(morgan('tiny'));

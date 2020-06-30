@@ -13,7 +13,7 @@ const activeTab = (history, path) => {
 
 const Header = ({ history }) => {
   return (
-    <nav className='navbar navbar-expand-md navbar-dark  bg-dark'>
+    <nav className='navbar navbar-expand-md navbar-dark  bg-dark shadow'>
       <Link className='navbar-brand' to='/'>
         <h2>Logo</h2>
       </Link>

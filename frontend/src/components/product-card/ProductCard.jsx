@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import Image from '../image-wrapper/Image';
 import { isAuthenticated } from '../../auth';
 import { Redirect } from 'react-router-dom';
-import { addItemToCart, removeItemFromCart } from '../../helper';
+// import { addItemToCart, removeItemFromCart } from '../../helper';
 import { CartContext } from '../../context/CartContext';
+
+import './style.scss';
 
 const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
   // const [redirect, setRedirect] = useState(false);
@@ -15,7 +17,20 @@ const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
   const disabledForAdmin = isAuthenticated() && user.role === 1 ? `disabled` : null;
 
   const addToCartHandler = () => {
-    addItemToCart(product);
+    if (!isAuthenticated()) {
+      // console.log('add cart hanler called');
+      return <Redirect to='/login' />;
+    }
+    setCartItems([...cartItems, product]);
+  };
+
+  const removeItemFromCartHandler = () => {
+    let tempItems = [...cartItems];
+
+    if (tempItems.indexOf(product) !== -1) {
+      tempItems.splice(tempItems.indexOf(product), 1);
+      setCartItems([...tempItems]);
+    }
   };
 
   // const performRedirect = (redirect) => {
@@ -29,7 +44,7 @@ const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
       addToCart && (
         <button
           onClick={addToCartHandler}
-          className={disabledForAdmin + ' btn btn-block btn-outline-success mt-2 mb-2'}
+          className={disabledForAdmin + ' btn btn-block btn-outline-success'}
         >
           Add to Cart
         </button>
@@ -41,11 +56,8 @@ const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
     return (
       removeFromCart && (
         <button
-          onClick={() => {
-            removeItemFromCart(product._id);
-            // setReload(!reload);
-          }}
-          className={disabledForAdmin + ' btn btn-block btn-outline-danger mt-2 mb-2'}
+          onClick={removeItemFromCartHandler}
+          className={disabledForAdmin + ' btn btn-block btn-outline-danger'}
         >
           Remove from cart
         </button>
@@ -54,17 +66,19 @@ const ProductCard = ({ product, addToCart = true, removeFromCart = false }) => {
   };
 
   return (
-    <div className='card text-white bg-dark border border-info '>
-      <div className='card-header lead'> {product.name} </div>
+    <div className='card shadow'>
+      <div className='card-header'>
+        <h4 className='card-title'>{product.name}</h4>
+      </div>
+      <Image product={product} />
       <div className='card-body'>
         {/* {performRedirect(redirect)} */}
-        <Image product={product} />
-        <p className='lead bg-success font-weight-normal text-wrap'>{product.description}</p>
-        <p className='btn btn-success rounded  btn-sm px-4'>{product.price + ' $'}</p>
-        <div className='row'>
-          <div className='col-12'>{showAddToCart()}</div>
-          <div className='col-12'>{showRemoveFromCart()}</div>
-        </div>
+        <p className='card-subtitle mb-2'>{product.description}</p>
+        <h5 className='card-text'>{'INR ' + product.price}</h5>
+      </div>
+      <div className='card-footer'>
+        {showAddToCart()}
+        {showRemoveFromCart()}
       </div>
     </div>
   );

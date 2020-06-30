@@ -4,8 +4,6 @@ import { Redirect } from 'react-router-dom';
 import { login, authenticate, isAuthenticated } from '../../auth';
 
 const Login = () => {
-  //
-
   const [formData, setFormData] = useState({
     email: 'chow@test.com',
     password: 'password',
@@ -78,7 +76,7 @@ const Login = () => {
     // todo continue from here
     if (didRedirect) {
       if (user && user.role === 1) {
-        return <Redirect to='/admin/dashboard' />;
+        return <Redirect to='/' />;
       } else {
         return <Redirect to='/' />;
       }
@@ -123,6 +121,8 @@ const Login = () => {
       </div>
     );
   };
+
+  console.log('Login rendered');
 
   return (
     <div>

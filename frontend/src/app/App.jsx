@@ -31,12 +31,12 @@ const App = () => {
         <CartProvider>
           <Route exact path='/' component={Home} />
           <PrivateRoute exact path='/cart' component={Cart} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <PrivateRoute exact path='/user/dashboard' component={UserDashBoard} />
+          <AdminRoute exact path='/admin' component={AdminDashBoard} />
+          <Redirect to='/' />
         </CartProvider>
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/login' component={Login} />
-        <PrivateRoute exact path='/user/dashboard' component={UserDashBoard} />
-        <AdminRoute exact path='/admin' component={AdminDashBoard} />
-        <Redirect to='/' />
       </Switch>
       <Footer />
     </BrowserRouter>

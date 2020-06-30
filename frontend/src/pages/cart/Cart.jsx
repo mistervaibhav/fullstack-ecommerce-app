@@ -9,9 +9,11 @@ const Cart = () => {
   const [reload, setReload] = useState(false);
   const [cartItems, setCartItems] = useContext(CartContext);
 
+  console.log(cartItems);
+
   useEffect(() => {
-    setProducts(loadItemsFromCart());
-  }, [reload]);
+    setProducts(cartItems);
+  }, [cartItems]);
 
   const loadProducts = () => {
     return (
@@ -23,8 +25,6 @@ const Cart = () => {
             product={product}
             removeFromCart={true}
             addToCart={false}
-            setReload={setReload}
-            reload={reload}
           />
         ))}
       </div>

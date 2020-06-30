@@ -24,11 +24,12 @@ function HomePage() {
   return (
     <div className='container'>
       <div className='row'>
-        {products.map((product, index) => (
-          <div key={index} className='col-4'>
-            <ProductCard product={product} />
-          </div>
-        ))}
+        {products &&
+          products.map((product, index) => (
+            <div key={index} className='col-4'>
+              <ProductCard id={index} product={product} />
+            </div>
+          ))}
       </div>
     </div>
   );
