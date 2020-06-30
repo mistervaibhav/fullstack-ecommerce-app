@@ -9,9 +9,8 @@
     "yarn": "1.x"
   },
   "scripts": {
-    "start": "cd backend && npm install && npm run start",
-    "start-client": "cd frontend && yarn install && yarn build",
-    "heroku-postbuild": "npm run start && npm run start-client"
+    "start": "cd backend && npm install && npm start",
+    "heroku-postbuild": "cd frontend && yarn install && yarn build"
   },
   "repository": {
     "type": "git",
