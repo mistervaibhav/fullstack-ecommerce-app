@@ -1,11 +1,10 @@
 import axios from 'axios';
-import { API } from '../config/api';
 
 /*----------------------------------------------------------------------------------------------- */
 
 export const register = async (data) => {
   try {
-    const response = await axios.post(`${API}/register`, data);
+    const response = await axios.post(`/api/register`, data);
     return response.data;
   } catch (error) {
     return error.response.data;
@@ -16,7 +15,7 @@ export const register = async (data) => {
 
 export const login = async (data) => {
   try {
-    const response = await axios.post(`${API}/login`, data);
+    const response = await axios.post(`/api/login`, data);
     //  console.log('success in login', response.data);
     return response;
   } catch (error) {
@@ -31,7 +30,7 @@ export const logout = async (next) => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('token');
     next();
-    return await fetch(`${API}/logout`, {
+    return await fetch(`/api/logout`, {
       method: 'GET',
     })
       .then((response) => console.log(response))
