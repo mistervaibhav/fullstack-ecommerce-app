@@ -3,6 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { isAuthenticated, logout } from '../../auth';
 
+import './style.scss';
+
 const activeTab = (history, path) => {
   if (history.location.pathname === path) {
     return { color: '#888888' };
@@ -13,9 +15,9 @@ const activeTab = (history, path) => {
 
 const Header = ({ history }) => {
   return (
-    <nav className='navbar navbar-expand-md navbar-dark  bg-dark shadow'>
+    <nav id='header' className='navbar navbar-expand-md shadow'>
       <Link className='navbar-brand' to='/'>
-        <h2>Logo</h2>
+        <h2 className='text-white'>Logo</h2>
       </Link>
       <button className='navbar-toggler' data-toggle='collapse' data-target='#navbarMenu'>
         <span className='navbar-toggler-icon'></span>
@@ -31,11 +33,7 @@ const Header = ({ history }) => {
           )}
           {isAuthenticated() && isAuthenticated().user.role === 0 && (
             <li className='nav-item'>
-              <Link
-                style={activeTab(history, '/user/dashboard')}
-                className='nav-link'
-                to='/user/dashboard'
-              >
+              <Link style={activeTab(history, '/user')} className='nav-link' to='/user'>
                 <h4>U. dashboard</h4>
               </Link>
             </li>

@@ -6,6 +6,7 @@ const {
   getProduct,
   getProductAll,
   getUniqueCategoriesAll,
+  getProductsByCategory,
   updateProduct,
   deleteProduct,
 } = require('../controllers/product_controller');
@@ -20,6 +21,7 @@ router.param('productId', getProductById);
 router.get('/all', getProductAll);
 router.get('/categories', getUniqueCategoriesAll);
 router.get('/assets/:productId', loadImage);
+router.get('/:category', getProductsByCategory);
 router.get('/:productId', getProduct);
 
 router.post('/create/:userId', isLoggedIn, isAuthenticated, isAdmin, createProduct);

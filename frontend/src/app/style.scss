@@ -1,6 +1,14 @@
+html {
+  //   scroll-snap-type: y mandatory;
+  //   overflow-y: scroll;
+}
+
 body {
-  // background-color: white;
   background-color: #343a40;
+  // #header,
+  // #section-wrapper .product-section {
+  //   scroll-snap-align: start;
+  // }
 }
 
 .btn,

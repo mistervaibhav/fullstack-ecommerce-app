@@ -1,52 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { loadItemsFromCart } from '../../helper';
-import ProductCard from '../../components/product-card/ProductCard';
-import { CartContext } from '../../context/CartContext';
+import CartItem from '../../components/cart-item/CartItem';
+import { MainContext } from '../../context/MainContext';
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
-  const [reload, setReload] = useState(false);
-  const [cartItems, setCartItems] = useContext(CartContext);
+  const [cartItems, setCartItems] = useContext(MainContext);
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   useEffect(() => {
     setProducts(cartItems);
   }, [cartItems]);
 
-  const loadProducts = () => {
-    return (
-      <div className='row'>
-        {products.map((product, index) => (
-          <ProductCard
-            className='col-2'
-            key={index}
-            product={product}
-            removeFromCart={true}
-            addToCart={false}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const loadCheckout = () => {
-    return (
-      <div>
-        <h2>CHeckout here</h2>
-      </div>
-    );
-  };
-
   return (
-    <div className='container-fluid mx-3'>
-      <div className='row'>
-        <div className='col-9 '>
-          <h2>Cart Items</h2>
-          {loadProducts()}
-        </div>
-        <div className='col-3'>{loadCheckout()}</div>
+    <div className='container-fluid'>
+      <h2>Cart Items</h2>
+      <div className='container'>
+        {cartItems.map((item, index) => (
+          <CartItem key={index} item={item} />
+        ))}
       </div>
     </div>
   );

@@ -99,6 +99,25 @@ const getProductAll = async (req, res) => {
     });
   }
 };
+/*---------------------------------------------------------*/
+
+const getProductsByCategory = async (req, res) => {
+  try {
+    let { category } = req.params;
+
+    const products = await Product.find({ category: category });
+
+    if (!products) {
+      throw error;
+    } else {
+      res.status(200).json(products);
+    }
+  } catch (error) {
+    res.status(400).json({
+      error: 'No products found',
+    });
+  }
+};
 
 /*---------------------------------------------------------*/
 
@@ -207,6 +226,7 @@ module.exports = {
   createProduct,
   getProduct,
   getProductAll,
+  getProductsByCategory,
   getUniqueCategoriesAll,
   updateProduct,
   deleteProduct,

@@ -55,11 +55,26 @@ export const getCategories = async () => {
 
 /**
  * * GET
- * * GET A PRODUCT
+ * * GET A PRODUCT BY ID
  */
 export const getProductById = async (productId) => {
   try {
     const response = await axios.get(`/api/products/${productId}`);
+    // console.log(response.data);
+    return response.data;
+  } catch (error) {
+    // console.log(error.response.data);
+    return error.response.data;
+  }
+};
+
+/**
+ * * GET
+ * * GET PRODUCTS BY CATEGORY
+ */
+export const getProductsByCategory = async (category) => {
+  try {
+    const response = await axios.get(`/api/products/${category}`);
     // console.log(response.data);
     return response.data;
   } catch (error) {

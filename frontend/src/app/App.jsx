@@ -19,7 +19,7 @@ import PrivateRoute from '../auth/PrivateRoutes';
 // import { isAuthenticated } from '../auth';
 
 // //* from context
-import { CartProvider } from '../context/CartContext';
+import { MainProvider } from '../context/MainContext';
 
 import './style.scss';
 
@@ -28,15 +28,15 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Switch>
-        <CartProvider>
+        <MainProvider>
           <Route exact path='/' component={Home} />
           <PrivateRoute exact path='/cart' component={Cart} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
-          <PrivateRoute exact path='/user/dashboard' component={UserDashBoard} />
+          <PrivateRoute exact path='/user' component={UserDashBoard} />
           <AdminRoute exact path='/admin' component={AdminDashBoard} />
           <Redirect to='/' />
-        </CartProvider>
+        </MainProvider>
       </Switch>
       <Footer />
     </BrowserRouter>

@@ -1,17 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-import { getProducts } from '../../helper';
+import { getCategories } from '../../helper';
 
-import ProductCard from '../../components/product-card/ProductCard';
+import Hero from '../../components/hero/Hero';
+import ProductSection from '../../components/product-section/ProductSection';
 
 function HomePage() {
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   const loadProducts = async () => {
     try {
-      let products = await getProducts();
+      let categories = await getCategories();
       // console.log('loaded from db');
-      setProducts(products);
+      setCategories(categories);
     } catch (error) {
       console.log(error);
     }
@@ -22,14 +23,15 @@ function HomePage() {
   }, []);
 
   return (
-    <div className='container'>
-      <div className='row'>
-        {products &&
-          products.map((product, index) => (
-            <div key={index} className='col-4'>
-              <ProductCard id={index} product={product} />
-            </div>
-          ))}
+    <div id='home'>
+      <Hero />
+      <div className='container' id='section-wrapper'>
+        <div>
+          {categories &&
+            categories.map((category, index) => (
+              <ProductSection key={index} id={index} category={category} />
+            ))}
+        </div>
       </div>
     </div>
   );
