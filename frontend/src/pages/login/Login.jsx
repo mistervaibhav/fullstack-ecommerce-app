@@ -5,12 +5,20 @@ import { login, authenticate, isAuthenticated } from '../../auth';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: 'chow@test.com',
-    password: 'password',
+    email: '',
+    password: '',
     error: '',
     loading: false,
     didRedirect: false,
   });
+  // ! for testing only
+  // const [formData, setFormData] = useState({
+  //   email: 'chow@test.com',
+  //   password: 'password',
+  //   error: '',
+  //   loading: false,
+  //   didRedirect: false,
+  // });
 
   const { email, password, error, loading, didRedirect } = formData;
   const { user } = isAuthenticated();
@@ -88,8 +96,9 @@ const Login = () => {
 
   const loginForm = () => {
     return (
-      <div className='row'>
+      <div className='row p-5'>
         <div className='col-md-6 offset-sm-3 text-left'>
+          <h1 className='text-white'>Login to continue</h1>
           <form>
             <div className='form-group'>
               <label className='text-light'>Email</label>
@@ -122,7 +131,7 @@ const Login = () => {
     );
   };
 
-  console.log('Login rendered');
+  // console.log('Login rendered');
 
   return (
     <div>
@@ -130,7 +139,7 @@ const Login = () => {
       {errorMessage()}
       {loginForm()}
       {performRedirect()}
-      <p className='text-white text-center'> {JSON.stringify(formData)} </p>
+      {/* <p className='text-white text-center'> {JSON.stringify(formData)} </p> */}
     </div>
   );
 };

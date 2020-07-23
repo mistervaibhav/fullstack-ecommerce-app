@@ -73,8 +73,9 @@ const Register = () => {
 
   const registerForm = () => {
     return (
-      <div className='row'>
+      <div className='row p-5'>
         <div className='col-md-6 offset-sm-3 text-left'>
+          <h1 className='text-white'>Register here to get started</h1>
           {successMessage()}
           {errorMessage()}
           <form>

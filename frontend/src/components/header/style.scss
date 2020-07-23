@@ -1,9 +1,11 @@
-#header {
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   right: 0;
-  //   z-index: 1;
+@font-face {
+  font-family: AdindaMelia;
+  src: url('./AdindaMelia.otf') format('opentype');
+}
 
-  //   background-color: rgba($color: #343434, $alpha: 0.8);
+#header {
+  .logo {
+    font-family: 'AdindaMelia';
+    font-size: 28px;
+  }
 }

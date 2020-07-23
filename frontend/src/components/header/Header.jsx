@@ -17,7 +17,7 @@ const Header = ({ history }) => {
   return (
     <nav id='header' className='navbar navbar-expand-md shadow'>
       <Link className='navbar-brand' to='/'>
-        <h2 className='text-white'>Logo</h2>
+        <h2 className='text-white logo'>Merchase</h2>
       </Link>
       <button className='navbar-toggler' data-toggle='collapse' data-target='#navbarMenu'>
         <span className='navbar-toggler-icon'></span>
