@@ -2,7 +2,7 @@
 
 An ecommerce app, built on the MERN stack.
 
-### Live demo at : [http://http://merchase.herokuapp.com](http://http://merchase.herokuapp.com)
+### Live demo at : [http://merchase.herokuapp.com](http://merchase.herokuapp.com)
 
 ## Frontend
 
