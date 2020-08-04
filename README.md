@@ -2,6 +2,8 @@
 
 An ecommerce app, built on the MERN stack.
 
+### Live demo at : [http://http://merchase.herokuapp.com](http://http://merchase.herokuapp.com)
+
 ## Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
